@@ -13,13 +13,12 @@
   },
 
   "packOptions": {
-    "projectUrl": "https://access-it.visualstudio.com/Ait.NetCore/",
-    "iconUrl": "http://www.access-it.fr/~/media/LOGO%20IT%20daccess%20itweb.ashx?h=64&la=fr-FR&w=64",
-    "tags": [ "dryioc", "ioc", "dependency", "injection" ],
-    "owners": [ "Access-It" ]
+    "projectUrl": "https://github.com/trenoncourt/HtmlAgilityPack.CssSelectors.NetCore",
+    "tags": [ "HtmlAgilityPack", "HtmlAgilityPack.NetCore", "Css" ],
+    "owners": [ "trenoncourt" ]
   },
 
-  "title": "DryIoc helper for .Net Core dependency injection",
-  "description": "DryIoc helper for .Net Core dependency injection",
+  "title": ".Net Core version of HtmlAgilityPack.CssSelector which use the .Net Core version of HtmlAgilityPack",
+  "description": ".Net Core version of HtmlAgilityPack.CssSelector which use the .Net Core version of HtmlAgilityPack",
   "authors": [ "Thibaut Renoncourt" ]
 }
