@@ -60,6 +60,33 @@ namespace HtmlAgilityPack.CssSelectors.NetCore.UnitTests
             Assert.IsTrue(elements[0].Id == "spanB");
         }
 
+		[Test]
+        public void GetElementsWithTwoClasses()
+        {
+            var elements = Doc.QuerySelectorAll(".active.lv1");
+
+            Assert.IsTrue(elements.Count == 1);
+            Assert.IsTrue(elements[0].InnerText == "L12");
+        }
+
+		[Test]
+        public void GetElementsByClassInsideClass()
+        {
+            var elements = Doc.QuerySelectorAll(".lv0 .lv1");
+
+            Assert.IsTrue(elements.Count == 3);
+            Assert.IsTrue(elements[1].InnerText == "L12");
+        }
+
+		[Test]
+        public void GetElementsByClassInsideId()
+        {
+            var elements = Doc.QuerySelectorAll("#ul .lv1");
+
+            Assert.IsTrue(elements.Count == 3);
+            Assert.IsTrue(elements[1].InnerText == "L12");
+        }
+
 
 
         private static HtmlDocument LoadHtml()
