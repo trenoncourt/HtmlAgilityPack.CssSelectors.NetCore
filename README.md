@@ -10,8 +10,8 @@ Install-Package HtmlAgilityPack.CssSelectors.NetCore
 Usage:
 ```c#
 var doc = new HtmlAgilityPack.HtmlDocument();
-doc.Load("test.html");
-  
+doc.Load(new FileStream("test.html", FileMode.Open));
+
 IList<HtmlNode> nodes = doc.QuerySelectorAll("div .my-class[data-attr=123] > ul li");
-HtmlNode node = nodes.QuerySelector("p.with-this-class span[data-myattr]");
+HtmlNode node = nodes[0].QuerySelector("p.with-this-class span[data-myattr]");
 ```
