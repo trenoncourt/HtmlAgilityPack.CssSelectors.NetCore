@@ -90,12 +90,12 @@ namespace HtmlAgilityPack.CssSelectors.NetCore.UnitTests
         public void GetElementsWithoutComments()
         {
             var element = Doc.QuerySelector("#with-comments");
-            string tt = element.ChildNodes
+            string text = element.ChildNodes
                 .Where(d => d.NodeType == HtmlNodeType.Element)
                 .SelectMany(d => d.ChildNodes)
                 .Where(d => d.NodeType != HtmlNodeType.Comment)
                 .Aggregate("", (s, n) => s + n.InnerHtml);
-            Assert.IsTrue(tt == "Hello World!");
+            Assert.IsTrue(text == "Hello World!");
         }
 
 
