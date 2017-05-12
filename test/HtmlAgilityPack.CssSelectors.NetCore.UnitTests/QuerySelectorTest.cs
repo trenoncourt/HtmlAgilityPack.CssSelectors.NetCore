@@ -14,7 +14,6 @@ namespace HtmlAgilityPack.CssSelectors.NetCore.UnitTests
         public void IdSelectorMustReturnOnlyFirstElement()
         {
             var elements = Doc.QuerySelectorAll("#myDiv");
-
             Assert.IsTrue(elements.Count == 1);
             Assert.IsTrue(elements[0].Id == "myDiv");
             Assert.IsTrue(elements[0].Attributes["first"].Value == "1");
@@ -85,6 +84,18 @@ namespace HtmlAgilityPack.CssSelectors.NetCore.UnitTests
 
             Assert.IsTrue(elements.Count == 3);
             Assert.IsTrue(elements[1].InnerText == "L12");
+        }
+
+		[Test]
+        public void GetElementsWithoutComments()
+        {
+            var element = Doc.QuerySelector("#with-comments");
+            string tt = element.ChildNodes
+                .Where(d => d.NodeType == HtmlNodeType.Element)
+                .SelectMany(d => d.ChildNodes)
+                .Where(d => d.NodeType != HtmlNodeType.Comment)
+                .Aggregate("", (s, n) => s + n.InnerHtml);
+            Assert.IsTrue(tt == "Hello World!");
         }
 
 
