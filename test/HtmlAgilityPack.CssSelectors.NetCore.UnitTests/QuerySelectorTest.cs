@@ -25,8 +25,8 @@ namespace HtmlAgilityPack.CssSelectors.NetCore.UnitTests
             var elements = Doc.QuerySelectorAll("*[id=myDiv]");
 
             Assert.IsTrue(elements.Distinct().Count() == 2 && elements.Count == 2);
-            for (int i = 0; i < elements.Count; i++)
-                Assert.IsTrue(elements[i].Id == "myDiv");
+            foreach (HtmlNode node in elements)
+                Assert.IsTrue(node.Id == "myDiv");
         }
 
         [Test]
@@ -37,7 +37,7 @@ namespace HtmlAgilityPack.CssSelectors.NetCore.UnitTests
 
             Assert.IsTrue(elements1.Count == 1);
             for (int i = 0; i < elements1.Count; i++)
-                Assert.IsTrue((bool) (elements1[i] == elements2[i]));
+                Assert.IsTrue(elements1[i] == elements2[i]);
         }
 
 		[Test]
