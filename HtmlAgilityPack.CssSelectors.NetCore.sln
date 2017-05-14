@@ -1,20 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A3AB5E3F-E8CE-4373-9F45-396E794FE9AE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0069787E-52F4-471D-9A30-D189C4D2AEF7}"
-	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
-	EndProjectSection
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "HtmlAgilityPack.CssSelectors.NetCore", "src\HtmlAgilityPack.CssSelectors.NetCore\HtmlAgilityPack.CssSelectors.NetCore.xproj", "{4CDC309A-EC83-4A31-9C35-A2D76A828B79}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{8381BF5A-55F7-41FC-988A-344ED597F963}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "HtmlAgilityPack.CssSelectors.NetCore.UnitTests", "test\HtmlAgilityPack.CssSelectors.NetCore.UnitTests\HtmlAgilityPack.CssSelectors.NetCore.UnitTests.xproj", "{D050ECAC-79F5-452C-999A-B267AAD994A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HtmlAgilityPack.CssSelectors.NetCore", "src\HtmlAgilityPack.CssSelectors.NetCore\HtmlAgilityPack.CssSelectors.NetCore.csproj", "{4CDC309A-EC83-4A31-9C35-A2D76A828B79}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HtmlAgilityPack.CssSelectors.NetCore.UnitTests", "test\HtmlAgilityPack.CssSelectors.NetCore.UnitTests\HtmlAgilityPack.CssSelectors.NetCore.UnitTests.csproj", "{D050ECAC-79F5-452C-999A-B267AAD994A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

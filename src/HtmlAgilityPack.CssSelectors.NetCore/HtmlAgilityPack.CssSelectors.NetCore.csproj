@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>.Net Core version of HtmlAgilityPack.CssSelector which use the .Net Core version of HtmlAgilityPack</Description>
+    <AssemblyTitle>.Net Core version of HtmlAgilityPack.CssSelector which use the .Net Core version of HtmlAgilityPack</AssemblyTitle>
+    <Authors>Thibaut Renoncourt</Authors>
+    <TargetFramework>netstandard1.5</TargetFramework>
+    <AssemblyName>HtmlAgilityPack.CssSelectors.NetCore</AssemblyName>
+    <PackageId>HtmlAgilityPack.CssSelectors.NetCore</PackageId>
+    <PackageTags>HtmlAgilityPack;HtmlAgilityPack.NetCore;Css</PackageTags>
+    <PackageProjectUrl>https://github.com/trenoncourt/HtmlAgilityPack.CssSelectors.NetCore</PackageProjectUrl>
+    <NetStandardImplicitPackageVersion>1.6.0</NetStandardImplicitPackageVersion>
+    <PackageTargetFallback>$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack.NetCore" Version="1.5.0.1" />
+  </ItemGroup>
+
+</Project>
