@@ -1,16 +1,16 @@
 ﻿using System.IO;
 using System.Text;
-using NUnit.Framework;
 using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace HtmlAgilityPack.CssSelectors.NetCore.UnitTests
 {
-    [TestFixture]
+    [TestClass]
     public class QuerySelectorTest
     {
         private static readonly HtmlDocument Doc = LoadHtml();
 
-        [Test]
+        [TestMethod]
         public void IdSelectorMustReturnOnlyFirstElement()
         {
             var elements = Doc.QuerySelectorAll("#myDiv");
@@ -19,7 +19,7 @@ namespace HtmlAgilityPack.CssSelectors.NetCore.UnitTests
             Assert.IsTrue(elements[0].Attributes["first"].Value == "1");
         }
 
-        [Test]
+        [TestMethod]
         public void GetElementsByAttribute()
         {
             var elements = Doc.QuerySelectorAll("*[id=myDiv]");
@@ -29,7 +29,7 @@ namespace HtmlAgilityPack.CssSelectors.NetCore.UnitTests
                 Assert.IsTrue(elements[i].Id == "myDiv");
         }
 
-        [Test]
+        [TestMethod]
         public void GetElementsByClassName1()
         {
             var elements1 = Doc.QuerySelectorAll(".cls-a");
@@ -40,7 +40,7 @@ namespace HtmlAgilityPack.CssSelectors.NetCore.UnitTests
                 Assert.IsTrue((bool) (elements1[i] == elements2[i]));
         }
 
-		[Test]
+		[TestMethod]
         public void GetElementsByClassName_MultiClasses()
         {
             var elements = Doc.QuerySelectorAll(".cls-a, .cls-b");
@@ -50,7 +50,7 @@ namespace HtmlAgilityPack.CssSelectors.NetCore.UnitTests
             Assert.IsTrue(elements[1].Id == "spanB");
         }
 
-		[Test]
+		[TestMethod]
         public void GetElementsByClassName_WithUnderscore()
         {
             var elements = Doc.QuerySelectorAll(".underscore_class");
@@ -59,7 +59,7 @@ namespace HtmlAgilityPack.CssSelectors.NetCore.UnitTests
             Assert.IsTrue(elements[0].Id == "spanB");
         }
 
-		[Test]
+		[TestMethod]
         public void GetElementsWithTwoClasses()
         {
             var elements = Doc.QuerySelectorAll(".active.lv1");
@@ -68,7 +68,7 @@ namespace HtmlAgilityPack.CssSelectors.NetCore.UnitTests
             Assert.IsTrue(elements[0].InnerText == "L12");
         }
 
-		[Test]
+		[TestMethod]
         public void GetElementsByClassInsideClass()
         {
             var elements = Doc.QuerySelectorAll(".lv0 .lv1");
@@ -77,7 +77,7 @@ namespace HtmlAgilityPack.CssSelectors.NetCore.UnitTests
             Assert.IsTrue(elements[1].InnerText == "L12");
         }
 
-		[Test]
+		[TestMethod]
         public void GetElementsByClassInsideId()
         {
             var elements = Doc.QuerySelectorAll("#ul .lv1");
@@ -86,7 +86,7 @@ namespace HtmlAgilityPack.CssSelectors.NetCore.UnitTests
             Assert.IsTrue(elements[1].InnerText == "L12");
         }
 
-		[Test]
+		[TestMethod]
         public void GetElementsWithoutComments()
         {
             var element = Doc.QuerySelector("#with-comments");
