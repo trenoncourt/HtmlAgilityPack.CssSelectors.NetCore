@@ -15,3 +15,5 @@ doc.Load(new FileStream("test.html", FileMode.Open));
 IList<HtmlNode> nodes = doc.QuerySelectorAll("div .my-class[data-attr=123] > ul li");
 HtmlNode node = nodes[0].QuerySelector("p.with-this-class span[data-myattr]");
 ```
+## Buy me a beer
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/trenoncourt/5)
