@@ -1,12 +1,11 @@
 # HtmlAgilityPack.CssSelectors.NetCore
 NetStandard version of [HtmlAgilityPack.CssSelector](https://github.com/hcesar/HtmlAgilityPack.CssSelector/blob/master/README.md)
-which use the [.Net Core version of HtmlAgilityPack](https://github.com/zulfahmi93/HtmlAgilityPack.NetCore)
+which use [HtmlAgilityPack](https://github.com/zzzprojects/html-agility-pack)
 
-Install with [NuGet](https://www.nuget.org/packages/HtmlAgilityPack.CssSelectors.NetCore/1.0.0):
+Nuget: [![Nuget Downloads](https://img.shields.io/nuget/dt/HtmlAgilityPack.CssSelectors.NetCore.svg)](https://www.nuget.org/packages/HtmlAgilityPack.CssSelectors.NetCore)
 ```powershell
 Install-Package HtmlAgilityPack.CssSelectors.NetCore
 ```
-
 Usage:
 ```c#
 var doc = new HtmlAgilityPack.HtmlDocument();
