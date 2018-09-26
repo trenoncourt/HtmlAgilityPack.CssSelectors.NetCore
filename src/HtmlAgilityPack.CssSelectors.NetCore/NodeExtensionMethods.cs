@@ -16,7 +16,7 @@ namespace HtmlAgilityPack.CssSelectors.NetCore
             var attr = node.Attributes["class"];
             if (attr == null)
                 return new string[0];
-            return attr.Value.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+            return attr.Value.Split(new[] { ' ', '\t', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
         }
 
         public static int GetIndexOnParent(this HtmlNode node)

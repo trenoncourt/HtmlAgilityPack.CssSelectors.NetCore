@@ -98,7 +98,12 @@ namespace HtmlAgilityPack.CssSelectors.NetCore.UnitTests
             Assert.IsTrue(text == "Hello World!");
         }
 
-
+        [TestMethod]
+        public void GetElementsByClassName_WithWhitespace()
+        {
+            var elements = Doc.QuerySelectorAll(".whitespace");
+            Assert.IsNotNull(elements.Count == 3);
+        }
 
         private static HtmlDocument LoadHtml()
         {
