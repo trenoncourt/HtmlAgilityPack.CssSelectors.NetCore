@@ -4,7 +4,7 @@
     <Description>.Net Core version of HtmlAgilityPack.CssSelector which use the .Net Core version of HtmlAgilityPack</Description>
     <AssemblyTitle>.Net Core version of HtmlAgilityPack.CssSelector which use the .Net Core version of HtmlAgilityPack</AssemblyTitle>
     <Authors>Thibaut Renoncourt</Authors>
-    <TargetFramework>netstandard1.5</TargetFramework>
+    <TargetFrameworks>netstandard2.0;netstandard1.5</TargetFrameworks>
     <AssemblyName>HtmlAgilityPack.CssSelectors.NetCore</AssemblyName>
     <PackageId>HtmlAgilityPack.CssSelectors.NetCore</PackageId>
     <PackageTags>HtmlAgilityPack;HtmlAgilityPack.NetCore;Css</PackageTags>
