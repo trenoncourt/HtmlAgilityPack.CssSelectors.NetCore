@@ -99,6 +99,39 @@ namespace HtmlAgilityPack.CssSelectors.NetCore.UnitTests
         }
 
         [TestMethod]
+        public void GetElementsWithRelaxedStartsWithFilter()
+        {
+            var matches = Doc.QuerySelectorAll("#relaxed-starts-with-tests > p[class^=\"match\"]");
+            Assert.IsTrue(matches.Any() && matches.All(m => m.InnerText.Equals("Match")));
+            var mismatches = matches.First().ParentNode.ChildNodes.Where(n => n.Name == "p").Except(matches);
+            Assert.IsTrue(mismatches.Any() && mismatches.All(n => n.InnerText.Equals("NoMatch")));
+        }
+
+        [TestMethod]
+        public void GetElementsWithStrictStartsWithFilter()
+        {
+            var matches = Doc.QuerySelectorAll("#strict-starts-with-tests > p[class|=\"match\"]");
+            Assert.IsTrue(matches.Any() && matches.All(m => m.InnerText.Equals("Match")));
+            var mismatches = matches.First().ParentNode.ChildNodes.Where(n => n.Name == "p").Except(matches);
+            Assert.IsTrue(mismatches.Any() && mismatches.All(n => n.InnerText.Equals("NoMatch")));
+
+            // Test as well when te provided filter ends with a dash
+            matches = Doc.QuerySelectorAll("#strict-starts-with-tests-trailing-dash > p[class|=\"match-\"]");
+            Assert.IsTrue(matches.Any() && matches.All(m => m.InnerText.Equals("Match")));
+            mismatches = matches.First().ParentNode.ChildNodes.Where(n => n.Name == "p").Except(matches);
+            Assert.IsTrue(mismatches.Any() && mismatches.All(n => n.InnerText.Equals("NoMatch")));
+        }
+
+        [TestMethod]
+        public void GetElementsWithEndingBracketFollowedByClassName()
+        {
+            var matches = Doc.QuerySelectorAll("#ending-bracket-followed-by-class-test > a[href$=\".pdf\"].match");
+            Assert.IsTrue(matches.Any() && matches.All(m => m.InnerText.Equals("Match")));
+            var mismatches = matches.First().ParentNode.ChildNodes.Where(n => n.Name == "a").Except(matches);
+            Assert.IsTrue(mismatches.Any() && mismatches.All(n => n.InnerText.Equals("NoMatch")));
+        }
+
+        [TestMethod]
         public void GetElementsByClassName_WithWhitespace()
         {
             var elements = Doc.QuerySelectorAll(".whitespace");

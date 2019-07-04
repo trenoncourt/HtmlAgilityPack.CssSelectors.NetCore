@@ -56,6 +56,32 @@ namespace HtmlAgilityPack.CssSelectors.NetCore.Selectors
                 case '^': return (attr, v) => attr.StartsWith(v);
                 case '$': return (attr, v) => attr.EndsWith(v);
                 case '~': return (attr, v) => attr.Split(' ').Contains(v);
+
+                case '|':
+                    // This operator will only match if the first full-word in the attribute value
+                    // is either an exact match to the query or is an exact match immediately followed by a dash. 
+                    return (attr, v) =>
+                    {
+                        var isMatch = false;
+
+                        if (attr == v)
+                        {
+                            isMatch = true;
+                        }
+                        else if (attr.Length > v.Length)
+                        {
+                            var firstValue = attr
+                                .Split(new[] { ' ' }, StringSplitOptions.None)
+                                .FirstOrDefault();
+
+                            if (firstValue?.StartsWith(v) ?? false)
+                            {
+                                isMatch = firstValue.Length > v.Length && firstValue[v.Length] == '-';
+                            }
+                        }
+
+                        return isMatch;
+                    };
             }
 
             throw new NotSupportedException($"Invalid selector use for attribute {Selector}.");
