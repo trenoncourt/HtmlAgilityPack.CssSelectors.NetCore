@@ -31,10 +31,18 @@ namespace HtmlAgilityPack.CssSelectors.NetCore
             char closeBracket = '\0';
             for (int i = 0; i < token.Length; i++)
             {
-                if (isOpeningBracket && token[i] != closeBracket)
-                    continue;
+                if (isOpeningBracket)
+                {
+                    if (token[i] == closeBracket)
+                    {
+                        isOpeningBracket = false;
+                        isPrefix = true;
+                        rt.Add(token.Substring(start, i - start + 1));
+                        start = i + 1;
+                    }
 
-                isOpeningBracket = false;
+                    continue;
+                }
 
                 if (token[i] == '(')
                 {

@@ -31,10 +31,52 @@
                 </ul>
             </li>
         </ul>
-    <div id="with-comments">
-        <p><!-- comment 1 -->Hello</p>
-        <p> <!-- comment 2 -->World!</p>
-    </div>
+        <div id="relaxed-starts-with-tests">
+            <p class="match">Match</p>
+            <p class="match-1-2">Match</p>
+            <p class="match match1">Match</p>
+            <p class="match1 match2">Match</p>
+            <p class="Match">NoMatch</p>
+            <p class=" match">NoMatch</p>
+            <p class="m atch match">NoMatch</p>
+        </div>
+        <div id="strict-starts-with-tests">
+            <p class="match">Match</p>
+            <p class="match-1-2">Match</p>
+            <p class="match-1-2 other">Match</p>
+            <p class="Match">NoMatch</p>
+            <p class=" match">NoMatch</p>
+            <p class="match match1">NoMatch</p>
+            <p class="m atch match">NoMatch</p>
+            <p class="match1 match2">NoMatch</p>
+        </div>
+        <div id="strict-starts-with-tests-trailing-dash">
+            <p class="match-">Match</p>
+            <p class="match--1-2">Match</p>
+            <p class="match--1-2 other">Match</p>
+            <p class="match-1-2">NoMatch</p>
+            <p class="Match-">NoMatch</p>
+            <p class=" match-">NoMatch</p>
+            <p class="match- match--1">NoMatch</p>
+            <p class="m atch-- match--">NoMatch</p>
+            <p class="match-1 match-2">NoMatch</p>
+        </div>
+        <div id="ending-bracket-followed-by-class-test">
+            <a class="match" href="/path/file.pdf">Match</a>
+            <a class="match" href=".pdf">Match</a>
+            <a class="match" href="/path/file.pDf">NoMatch</a>
+            <a class="match" href=".pDf">NoMatch</a>
+            <a class="match" href="/path/file.pd">NoMatch</a>
+            <a class="nomatch" href="/path/file.pdf">NoMatch</a>
+            <a class="nomatch" href=".pdf">NoMatch</a>
+            <a class="nomatch" href="/path/file.pDf">NoMatch</a>
+            <a class="nomatch" href=".pDf">NoMatch</a>
+            <a class="nomatch" href="/path/file.pd">NoMatch</a>
+        </div>
+        <div id="with-comments">
+            <p><!-- comment 1 -->Hello</p>
+            <p> <!-- comment 2 -->World!</p>
+        </div>
         <div class="
 
              whitespace
