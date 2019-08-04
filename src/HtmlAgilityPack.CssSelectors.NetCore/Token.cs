@@ -22,7 +22,7 @@ namespace HtmlAgilityPack.CssSelectors.NetCore
 
         private static IList<string> SplitTokens(string token)
         {
-            Func<char, bool> isNameToken = (c) => char.IsLetterOrDigit(c) || c == '-'|| c == '_';
+            Func<char, bool> isNameToken = (c) => char.IsLetterOrDigit(c) || c == '-' || c == '_' || c == '*';
             var rt = new List<string>();
            
             int start = 0;

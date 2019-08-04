@@ -73,6 +73,52 @@
             <a class="nomatch" href=".pDf">NoMatch</a>
             <a class="nomatch" href="/path/file.pd">NoMatch</a>
         </div>
+        <div id="selector-nested-elements-same-type">
+            <span>
+                NoMatch
+                <span>
+                    Match
+                    <a>
+                        <span>
+                            Match
+                        </span>
+                    </a>
+                    <span>
+                        Match
+                    </span>
+                </span>
+            </span>
+            <div>
+                <span>NoMatch</span>
+            </div>
+            <span>NoMatch</span>
+        </div>
+        <div id="selector-asterisk-edgecase-1">
+            <div class="class-name-1">
+                Match
+                <span>NoMatch</span>
+                <span class="class-name-1">Match</span>
+                <span class="class-name-2">NoMatch</span>
+            </div>
+            <div class="class-name-2">
+                NoMatch
+                <span>NoMatch</span>
+            </div>
+            <span>NoMatch</span>
+        </div>
+        <div id="selector-asterisk-edgecase-2">
+            <div class="class-name-1">
+                NoMatch
+                <span>Match</span>
+                <span class="class-name-1">Match</span>
+                <span class="class-name-2">Match</span>
+            </div>
+            <div class="class-name-2">
+                NoMatch
+                <span>NoMatch</span>
+            </div>
+            <span>NoMatch</span>
+        </div>
         <div id="with-comments">
             <p><!-- comment 1 -->Hello</p>
             <p> <!-- comment 2 -->World!</p>

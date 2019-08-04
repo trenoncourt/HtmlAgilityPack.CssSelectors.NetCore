@@ -48,10 +48,23 @@ namespace HtmlAgilityPack.CssSelectors.NetCore
 
             bool allowTraverse = true;
 
-            foreach (var selector in selectors)
+            for (int i = 0; i < selectors.Count; i++)
             {
+                var selector = selectors[i];
+
                 if (allowTraverse && selector.AllowTraverse)
+                {
+                    // If this is not the first selector then we must make filter against the child nodes of the current set of nodes
+                    // since any selector that follows another selector always scopes down the nodes to the descendants of the last scope.
+                    // Example: "span span" Should only resolve with span elements that are descendants of another span element.
+                    // Any span elements that are not descendant of another span element shoud not be included in the output.
+                    if (i > 0)
+                    {
+                        nodes = nodes.SelectMany(n => n.ChildNodes);
+                    }
+
                     nodes = Traverse(nodes);
+                }
 
                 nodes = selector.Filter(nodes);
                 allowTraverse = selector.AllowTraverse;

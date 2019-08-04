@@ -132,6 +132,31 @@ namespace HtmlAgilityPack.CssSelectors.NetCore.UnitTests
         }
 
         [TestMethod]
+        public void GetElementsOfTypeThatAreDescendantOfAnotherWithSameType()
+        {
+            var matches = Doc.QuerySelectorAll("#selector-nested-elements-same-type span span");
+            Assert.IsTrue(matches.Count() == 3 && matches.All(m => m.InnerText.Trim().StartsWith("Match")));
+        }
+
+        [TestMethod]
+        public void GetAbsolutelyAllElements()
+        {
+            var matches = Doc.QuerySelectorAll("*");
+            Assert.IsTrue(matches.FirstOrDefault()?.Name.Equals("html") ?? false);
+            Assert.IsTrue(matches.Count() == Doc.DocumentNode.DescendantsAndSelf().Where(n => n.NodeType == HtmlNodeType.Element).Count());
+        }
+
+        [TestMethod]
+        public void GetElementsOfAnyTypeButWithMatchingClass()
+        {
+            var matches = Doc.QuerySelectorAll("#selector-asterisk-edgecase-1 *.class-name-1");
+            Assert.IsTrue(matches.Count() == 2 && matches.All(m => m.InnerText.Trim().StartsWith("Match")));
+
+            matches = Doc.QuerySelectorAll("#selector-asterisk-edgecase-2 *.class-name-1 *");
+            Assert.IsTrue(matches.Count() == 3 && matches.All(m => m.InnerText.Trim().StartsWith("Match")));
+        }
+
+        [TestMethod]
         public void GetElementsByClassName_WithWhitespace()
         {
             var elements = Doc.QuerySelectorAll(".whitespace");
