@@ -157,6 +157,19 @@ namespace HtmlAgilityPack.CssSelectors.NetCore.UnitTests
         }
 
         [TestMethod]
+        public void GetChildElementsOfTypeWithSpacelessSelector()
+        {
+            var matches = Doc.QuerySelectorAll("#selector-nospaces .class-name-1>p");
+            Assert.IsTrue(matches.Count() == 1 && matches.All(m => m.InnerText.Trim().StartsWith("Match")));
+
+            matches = Doc.QuerySelectorAll("#selector-nospaces .class-name-1> p");
+            Assert.IsTrue(matches.Count() == 1 && matches.All(m => m.InnerText.Trim().StartsWith("Match")));
+
+            matches = Doc.QuerySelectorAll("#selector-nospaces .class-name-1 >p");
+            Assert.IsTrue(matches.Count() == 1 && matches.All(m => m.InnerText.Trim().StartsWith("Match")));
+        }
+
+        [TestMethod]
         public void GetElementsByClassName_WithWhitespace()
         {
             var elements = Doc.QuerySelectorAll(".whitespace");
