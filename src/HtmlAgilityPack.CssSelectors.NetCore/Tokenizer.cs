@@ -43,7 +43,7 @@ namespace HtmlAgilityPack.CssSelectors.NetCore
 
                 char c = (char)v;
 
-                if (c == ' ' || c == '\t')
+                if (c == ' ' || c == '\t' || c == '>')
                     break;
 
                 sb.Append(c);
