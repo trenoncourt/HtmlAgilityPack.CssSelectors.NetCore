@@ -176,6 +176,14 @@ namespace HtmlAgilityPack.CssSelectors.NetCore.UnitTests
             Assert.IsNotNull(elements.Count == 3);
         }
 
+        [TestMethod]
+        public void GetElementsByNthOfType()
+        {
+            var elements = Doc.QuerySelectorAll("div:nth-of-type(5)");
+            Assert.IsTrue(elements.Distinct().Count() == 1 && elements.Count == 1);
+            Assert.IsTrue(elements[0].Id == "strict-starts-with-tests");
+        }
+
         private static HtmlDocument LoadHtml()
         {
             var htmlDocument = new HtmlDocument();
