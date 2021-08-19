@@ -179,6 +179,14 @@ namespace HtmlAgilityPack.CssSelectors.NetCore.UnitTests
         [TestMethod]
         public void GetElementsByNthOfType()
         {
+            var elements = Doc.QuerySelectorAll("div:nth-of-type(5)");
+            Assert.IsTrue(elements.Distinct().Count() == 1 && elements.Count == 1);
+            Assert.IsTrue(elements[0].Id == "strict-starts-with-tests");
+        }
+
+        [TestMethod]
+        public void GetElementsByNthOfTypeAlt()
+        {
             var matches = Doc.QuerySelectorAll("li:nth-of-type(2)");
             Assert.IsTrue(matches.Count() == 1 && matches.All(m => m.Name == "li" && m.HasClass("hover")));
         }
