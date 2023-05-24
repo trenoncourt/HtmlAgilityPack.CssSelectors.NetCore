@@ -183,6 +183,15 @@ namespace HtmlAgilityPack.CssSelectors.NetCore.UnitTests
             Assert.IsTrue(elements.Distinct().Count() == 1 && elements.Count == 1);
             Assert.IsTrue(elements[0].Id == "strict-starts-with-tests");
         }
+        
+        [DataTestMethod]
+        [DataRow("odd")]  
+        [DataRow("even")]  
+        public void GetElementsByNthChildOddEven(string selector)
+        {
+            var elements = Doc.QuerySelectorAll($"#odd-even-test p:nth-child({selector})");
+            Assert.IsTrue(elements.All(e => e.InnerText == selector));
+        }
 
         private static HtmlDocument LoadHtml()
         {
