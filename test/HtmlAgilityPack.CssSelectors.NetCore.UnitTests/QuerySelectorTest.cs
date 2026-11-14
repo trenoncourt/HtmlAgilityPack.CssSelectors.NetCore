@@ -176,6 +176,65 @@ namespace HtmlAgilityPack.CssSelectors.NetCore.UnitTests
             Assert.IsNotNull(elements.Count == 3);
         }
 
+        [TestMethod]
+        public void GetElementsByNthOfType()
+        {
+            var elements = Doc.QuerySelectorAll("div:nth-of-type(5)");
+            Assert.IsTrue(elements.Distinct().Count() == 1 && elements.Count == 1);
+            Assert.IsTrue(elements[0].Id == "strict-starts-with-tests");
+        }
+        
+        [DataTestMethod]
+        [DataRow("odd")]  
+        [DataRow("even")]  
+        public void GetElementsByNthChildOddEven(string selector)
+        {
+            var elements = Doc.QuerySelectorAll($"#odd-even-test p:nth-child({selector})");
+            Assert.IsTrue(elements.All(e => e.InnerText == selector));
+        }
+
+        [TestMethod]
+        public void GetElementsByNthOfTypeAlt()
+        {
+            var matches = Doc.QuerySelectorAll("li:nth-of-type(2)");
+            Assert.IsTrue(matches.Count() == 1 && matches.All(m => m.Name == "li" && m.HasClass("hover")));
+        }
+
+        [TestMethod]
+        public void GetElementsByNthLastOfType()
+        {
+            var matches = Doc.QuerySelectorAll("li:nth-last-of-type(1)");
+            Assert.IsTrue(matches.Count() == 2 && matches.All(m => m.Name == "li") &&
+                          matches.ElementAt(0).InnerText.Trim().StartsWith("L0") &&
+                          matches.ElementAt(1).InnerText.Trim() == "L13");
+        }
+
+        [TestMethod]
+        public void GetElementsByLastOfType()
+        {
+            var matches = Doc.QuerySelectorAll("li:last-of-type");
+            Assert.IsTrue(matches.Count() == 2 && matches.All(m => m.Name == "li") &&
+                          matches.ElementAt(0).InnerText.Trim().StartsWith("L0") &&
+                          matches.ElementAt(1).InnerText.Trim() == "L13");
+        }
+
+        [TestMethod]
+        public void GetElementsByFirstOfType()
+        {
+            var matches = Doc.QuerySelectorAll("li:first-of-type");
+            Assert.IsTrue(matches.Count() == 2 && matches.All(m => m.Name == "li") &&
+                          matches.ElementAt(0).InnerText.Trim().StartsWith("L0") &&
+                          matches.ElementAt(1).InnerText.Trim() == "L11");
+        }
+
+        [TestMethod]
+        public void GetElementsByOnlyOfType()
+        {
+            var matches = Doc.QuerySelectorAll("li:only-of-type");
+            Assert.IsTrue(matches.Count() == 1 && matches.All(m => m.Name == "li") &&
+                          matches.ElementAt(0).InnerText.Trim().StartsWith("L0"));
+        }
+
         private static HtmlDocument LoadHtml()
         {
             var htmlDocument = new HtmlDocument();

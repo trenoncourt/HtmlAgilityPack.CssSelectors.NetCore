@@ -32,6 +32,22 @@ namespace HtmlAgilityPack.CssSelectors.NetCore
             throw new InvalidOperationException("Node not found in its parent!");
         }
 
+        public static int GetIndexOnParent(this HtmlNode node, string tagName)
+        {
+            int idx = 0;
+            foreach (var n in node.ParentNode.GetChildElements())
+            {
+                if (!string.Equals(tagName, n.Name, StringComparison.OrdinalIgnoreCase))
+                    continue;
+
+                if (n == node)
+                    return idx;
+                idx++;
+            }
+
+            throw new InvalidOperationException("Node not found in its parent!");
+        }
+
         public static HtmlNode NextSiblingElement(this HtmlNode node)
         {
             var rt = node.NextSibling;
