@@ -30,6 +30,54 @@ namespace HtmlAgilityPack.CssSelectors.NetCore.UnitTests
         }
 
         [TestMethod]
+        public void GetElementsByAttributeWithCaseInsensitiveFlagAndPresenceSelector()
+        {
+            var elements = Doc.QuerySelectorAll("input[type=\"color\" i][list]");
+
+            Assert.AreEqual(1, elements.Count);
+            Assert.AreEqual("COLOR", elements[0].Attributes["type"].Value);
+            Assert.AreEqual(0, Doc.QuerySelectorAll("input[type=\"color\"][list]").Count);
+        }
+
+        [DataTestMethod]
+        [DataRow("select[name='extra[isFoil]']")]
+        [DataRow("select[name=\"extra[isFoil]\"]")]
+        public void GetElementsByAttributeWithBracketInQuotedValue(string selector)
+        {
+            var elements = Doc.QuerySelectorAll(selector);
+
+            Assert.AreEqual(1, elements.Count);
+            Assert.AreEqual("extra[isFoil]", elements[0].Attributes["name"].Value);
+        }
+
+        [TestMethod]
+        public void GetElementsByAttributeWithEscapedQuote()
+        {
+            var elements = Doc.QuerySelectorAll("select[data-label=\"say \\\"hello\\\"\"]");
+
+            Assert.AreEqual(1, elements.Count);
+            Assert.AreEqual("say \"hello\"", elements[0].Attributes["data-label"].Value);
+        }
+
+        [TestMethod]
+        public void GetElementsByAttributeWithEscapedClosingBracket()
+        {
+            var elements = Doc.QuerySelectorAll("select[name=extra\\]isFoil]");
+
+            Assert.AreEqual(1, elements.Count);
+            Assert.AreEqual("extra]isFoil", elements[0].Attributes["name"].Value);
+        }
+
+        [TestMethod]
+        public void GetElementsByNotWithEscapedClosingParenthesis()
+        {
+            var elements = Doc.QuerySelectorAll("select:not([name=extra\\)isFoil])");
+
+            Assert.AreEqual(3, elements.Count);
+            Assert.IsFalse(elements.Any(element => element.Attributes["name"]?.Value == "extra)isFoil"));
+        }
+
+        [TestMethod]
         public void GetElementsByClassName1()
         {
             var elements1 = Doc.QuerySelectorAll(".cls-a");
@@ -157,7 +205,7 @@ namespace HtmlAgilityPack.CssSelectors.NetCore.UnitTests
         }
 
         [TestMethod]
-        public void GetChildElementsOfTypeWithSpacelessSelector()
+        public void GetDirectChildElementsWithMultipleLevelsAndVaryingWhitespace()
         {
             var matches = Doc.QuerySelectorAll("#selector-nospaces .class-name-1>p");
             Assert.IsTrue(matches.Count() == 1 && matches.All(m => m.InnerText.Trim().StartsWith("Match")));
@@ -166,6 +214,12 @@ namespace HtmlAgilityPack.CssSelectors.NetCore.UnitTests
             Assert.IsTrue(matches.Count() == 1 && matches.All(m => m.InnerText.Trim().StartsWith("Match")));
 
             matches = Doc.QuerySelectorAll("#selector-nospaces .class-name-1 >p");
+            Assert.IsTrue(matches.Count() == 1 && matches.All(m => m.InnerText.Trim().StartsWith("Match")));
+
+            matches = Doc.QuerySelectorAll("#selector-nospaces .class-name-1 > p");
+            Assert.IsTrue(matches.Count() == 1 && matches.All(m => m.InnerText.Trim().StartsWith("Match")));
+
+            matches = Doc.QuerySelectorAll("#selector-nospaces .class-name-1  >   p");
             Assert.IsTrue(matches.Count() == 1 && matches.All(m => m.InnerText.Trim().StartsWith("Match")));
         }
 

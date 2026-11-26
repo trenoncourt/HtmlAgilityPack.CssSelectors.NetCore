@@ -29,10 +29,38 @@ namespace HtmlAgilityPack.CssSelectors.NetCore
             bool isPrefix = true;
             bool isOpeningBracket = false;
             char closeBracket = '\0';
+            char quote = '\0';
+            bool escaped = false;
             for (int i = 0; i < token.Length; i++)
             {
                 if (isOpeningBracket)
                 {
+                    if (escaped)
+                    {
+                        escaped = false;
+                        continue;
+                    }
+
+                    if (token[i] == '\\')
+                    {
+                        escaped = true;
+                        continue;
+                    }
+
+                    if (quote != '\0')
+                    {
+                        if (token[i] == quote)
+                            quote = '\0';
+
+                        continue;
+                    }
+
+                    if (token[i] == '"' || token[i] == '\'')
+                    {
+                        quote = token[i];
+                        continue;
+                    }
+
                     if (token[i] == closeBracket)
                     {
                         isOpeningBracket = false;
