@@ -39,6 +39,17 @@ namespace HtmlAgilityPack.CssSelectors.NetCore.UnitTests
             Assert.AreEqual(0, Doc.QuerySelectorAll("input[type=\"color\"][list]").Count);
         }
 
+        [DataTestMethod]
+        [DataRow("select[name='extra[isFoil]']")]
+        [DataRow("select[name=\"extra[isFoil]\"]")]
+        public void GetElementsByAttributeWithBracketInQuotedValue(string selector)
+        {
+            var elements = Doc.QuerySelectorAll(selector);
+
+            Assert.AreEqual(1, elements.Count);
+            Assert.AreEqual("extra[isFoil]", elements[0].Attributes["name"].Value);
+        }
+
         [TestMethod]
         public void GetElementsByClassName1()
         {
