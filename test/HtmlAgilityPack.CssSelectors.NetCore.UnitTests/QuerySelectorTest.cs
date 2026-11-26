@@ -30,6 +30,16 @@ namespace HtmlAgilityPack.CssSelectors.NetCore.UnitTests
         }
 
         [TestMethod]
+        public void GetElementsByAttributeWithCaseInsensitiveFlagAndPresenceSelector()
+        {
+            var elements = Doc.QuerySelectorAll("input[type=\"color\" i][list]");
+
+            Assert.AreEqual(1, elements.Count);
+            Assert.AreEqual("COLOR", elements[0].Attributes["type"].Value);
+            Assert.AreEqual(0, Doc.QuerySelectorAll("input[type=\"color\"][list]").Count);
+        }
+
+        [TestMethod]
         public void GetElementsByClassName1()
         {
             var elements1 = Doc.QuerySelectorAll(".cls-a");
@@ -157,7 +167,7 @@ namespace HtmlAgilityPack.CssSelectors.NetCore.UnitTests
         }
 
         [TestMethod]
-        public void GetChildElementsOfTypeWithSpacelessSelector()
+        public void GetDirectChildElementsWithMultipleLevelsAndVaryingWhitespace()
         {
             var matches = Doc.QuerySelectorAll("#selector-nospaces .class-name-1>p");
             Assert.IsTrue(matches.Count() == 1 && matches.All(m => m.InnerText.Trim().StartsWith("Match")));
@@ -166,6 +176,12 @@ namespace HtmlAgilityPack.CssSelectors.NetCore.UnitTests
             Assert.IsTrue(matches.Count() == 1 && matches.All(m => m.InnerText.Trim().StartsWith("Match")));
 
             matches = Doc.QuerySelectorAll("#selector-nospaces .class-name-1 >p");
+            Assert.IsTrue(matches.Count() == 1 && matches.All(m => m.InnerText.Trim().StartsWith("Match")));
+
+            matches = Doc.QuerySelectorAll("#selector-nospaces .class-name-1 > p");
+            Assert.IsTrue(matches.Count() == 1 && matches.All(m => m.InnerText.Trim().StartsWith("Match")));
+
+            matches = Doc.QuerySelectorAll("#selector-nospaces .class-name-1  >   p");
             Assert.IsTrue(matches.Count() == 1 && matches.All(m => m.InnerText.Trim().StartsWith("Match")));
         }
 
