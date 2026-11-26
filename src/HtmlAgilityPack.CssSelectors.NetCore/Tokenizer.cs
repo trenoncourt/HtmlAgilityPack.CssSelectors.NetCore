@@ -65,6 +65,7 @@ namespace HtmlAgilityPack.CssSelectors.NetCore
         private static void ReadWordFromBracket(System.IO.StringReader reader, StringBuilder word)
         {
             char quote = '\0';
+            bool escaped = false;
 
             while (true)
             {
@@ -74,6 +75,18 @@ namespace HtmlAgilityPack.CssSelectors.NetCore
 
                 char c = (char)v;
                 word.Append(c);
+
+                if (escaped)
+                {
+                    escaped = false;
+                    continue;
+                }
+
+                if (c == '\\')
+                {
+                    escaped = true;
+                    continue;
+                }
 
                 if (quote != '\0')
                 {

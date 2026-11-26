@@ -51,6 +51,33 @@ namespace HtmlAgilityPack.CssSelectors.NetCore.UnitTests
         }
 
         [TestMethod]
+        public void GetElementsByAttributeWithEscapedQuote()
+        {
+            var elements = Doc.QuerySelectorAll("select[data-label=\"say \\\"hello\\\"\"]");
+
+            Assert.AreEqual(1, elements.Count);
+            Assert.AreEqual("say \"hello\"", elements[0].Attributes["data-label"].Value);
+        }
+
+        [TestMethod]
+        public void GetElementsByAttributeWithEscapedClosingBracket()
+        {
+            var elements = Doc.QuerySelectorAll("select[name=extra\\]isFoil]");
+
+            Assert.AreEqual(1, elements.Count);
+            Assert.AreEqual("extra]isFoil", elements[0].Attributes["name"].Value);
+        }
+
+        [TestMethod]
+        public void GetElementsByNotWithEscapedClosingParenthesis()
+        {
+            var elements = Doc.QuerySelectorAll("select:not([name=extra\\)isFoil])");
+
+            Assert.AreEqual(3, elements.Count);
+            Assert.IsFalse(elements.Any(element => element.Attributes["name"]?.Value == "extra)isFoil"));
+        }
+
+        [TestMethod]
         public void GetElementsByClassName1()
         {
             var elements1 = Doc.QuerySelectorAll(".cls-a");

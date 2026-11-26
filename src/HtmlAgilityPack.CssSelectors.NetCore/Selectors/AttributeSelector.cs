@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace HtmlAgilityPack.CssSelectors.NetCore.Selectors
 {
@@ -53,8 +54,24 @@ namespace HtmlAgilityPack.CssSelectors.NetCore.Selectors
                 }
             }
 
+            value = UnescapeValue(value);
+
             return node => node.Attributes.Contains(filter) &&
                 operation(node.Attributes[filter].Value, value, comparison);
+        }
+
+        private static string UnescapeValue(string value)
+        {
+            var result = new StringBuilder(value.Length);
+            for (int i = 0; i < value.Length; i++)
+            {
+                if (value[i] == '\\' && i + 1 < value.Length)
+                    i++;
+
+                result.Append(value[i]);
+            }
+
+            return result.ToString();
         }
 
         private Func<string, string, StringComparison, bool> GetOperation(char value)

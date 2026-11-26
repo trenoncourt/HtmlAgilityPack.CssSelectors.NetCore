@@ -30,10 +30,23 @@ namespace HtmlAgilityPack.CssSelectors.NetCore
             bool isOpeningBracket = false;
             char closeBracket = '\0';
             char quote = '\0';
+            bool escaped = false;
             for (int i = 0; i < token.Length; i++)
             {
                 if (isOpeningBracket)
                 {
+                    if (escaped)
+                    {
+                        escaped = false;
+                        continue;
+                    }
+
+                    if (token[i] == '\\')
+                    {
+                        escaped = true;
+                        continue;
+                    }
+
                     if (quote != '\0')
                     {
                         if (token[i] == quote)
@@ -42,7 +55,7 @@ namespace HtmlAgilityPack.CssSelectors.NetCore
                         continue;
                     }
 
-                    if (closeBracket == ']' && (token[i] == '"' || token[i] == '\''))
+                    if (token[i] == '"' || token[i] == '\'')
                     {
                         quote = token[i];
                         continue;
